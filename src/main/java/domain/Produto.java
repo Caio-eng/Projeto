@@ -15,6 +15,8 @@ import lombok.Setter;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Produto {
 	
 	@Id
@@ -26,7 +28,7 @@ public class Produto {
 	@Column(nullable = false)
 	private Integer quantidade;
 	
-	@Column(nullable = false, precision = 5, scale = 2)
+	@Column(nullable = false, precision = 6, scale = 2)
 	private BigDecimal preco;
 	
 	@Column
