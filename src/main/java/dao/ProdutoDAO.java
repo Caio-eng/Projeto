@@ -1,7 +1,10 @@
 package dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 import domain.Produto;
 import util.JPAUtil;
@@ -14,5 +17,20 @@ public class ProdutoDAO {
 		sessao.persist(produto);
 		transacao.commit();
 		sessao.close();
+	}
+	
+	public Produto buscar(Integer codigo) {
+		EntityManager sessao = JPAUtil.getEntityManager();
+		Produto produto = sessao.find(Produto.class, codigo);
+		return produto;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Produto> listar() {
+		String jpql = "select p from Produto p order by nome";
+		EntityManager sessao = JPAUtil.getEntityManager();
+		Query consulta = sessao.createQuery(jpql);
+		List<Produto> resultado = consulta.getResultList();
+		return resultado;
 	}
 }
